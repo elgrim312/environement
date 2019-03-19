@@ -43,7 +43,7 @@ class OzaeManager
         return json_decode($result);
     }
 
-    public function getComputedForBiodiversity(?string $keyword = "pollution", ?int $limit = 20)
+    public function getComputedForBiodiversity(?string $keyword = "déforestation", ?int $limit = 20)
     {
         $articles = $this->sendRequest("articles?date=20180601__20180630&key=$this->apiKey&edition=en-us-ny&query=$keyword&hard_limit=$limit");
         $compound = 0;
