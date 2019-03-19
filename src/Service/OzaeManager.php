@@ -13,10 +13,13 @@ class OzaeManager
 {
     private $apiKey;
 
-    public function __construct($ozaeKey)
+    private $sentimenter;
+
+    public function __construct($ozaeKey, VaderSentimentManager $vaderSentimentManager)
     {
         $this->apiKey = $ozaeKey;
         $this->baseUrl = "https://api.ozae.com/gnw/";
+        $this->sentimenter = $vaderSentimentManager;
     }
 
     private function sendRequest(string $request)
@@ -40,10 +43,18 @@ class OzaeManager
         return json_decode($result);
     }
 
-    public function getArticleByKeyword(?string $keyword = "pollution", ?int $limit = 10)
+    public function getComputedForBiodiversity(?string $keyword = "pollution", ?int $limit = 20)
     {
-        $result = $this->sendRequest("articles?date=20180601__20180630&key=$this->apiKey&edition=en-us-ny&query=$keyword&hard_limit=$limit");
+        $articles = $this->sendRequest("articles?date=20180601__20180630&key=$this->apiKey&edition=en-us-ny&query=$keyword&hard_limit=$limit");
+        $compound = 0;
 
-        dump($result);die;
+        foreach ($articles->articles as $article) {
+            $compound = $compound + $this->sentimenter->getSentiment($article->name)["compound"];
+        }
+
+         $div = count($articles->articles) ? count($articles->articles) : 1;
+         $compound = $compound / $div;
+
+        return $compound;
     }
 }

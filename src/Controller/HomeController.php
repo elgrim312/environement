@@ -9,14 +9,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     /**
-     * @Route("/home", name="home")
+     * @Route("/", name="app_index")
      */
     public function index(OzaeManager $ozaeManager)
     {
-        $ozaeManager->getArticleByKeyword("water");
-        return $this->json([
-            'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/HomeController.php',
+        $biodiversityScore = $ozaeManager->getComputedForBiodiversity();
+
+        return $this->render('index.html.twig', [
+            'biodiversityScore' => $biodiversityScore
         ]);
     }
 }
