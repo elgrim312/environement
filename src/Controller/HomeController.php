@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Service\AirQualityManager;
+use App\Service\Co2SignalManager;
 use App\Service\DateManager;
 use App\Service\OzaeManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -44,6 +45,20 @@ class HomeController extends AbstractController
         $country = $request->request->get('country');
         $currentDate = new \DateTime();
 
-        return $ozaeManager->getComputedForSentence($startDate, $currentDate);
+        return new JsonResponse([
+            'data' => $ozaeManager->getComputedForSentence($startDate, $currentDate, $country)
+        ]);
+    }
+
+    /**
+     * @Route("/carbonEvolution", name="app_index_carbon_evolution", methods={"POST"})
+     */
+    public function getCarbonEvolution(Co2SignalManager $co2SignalManager, Request $request)
+    {
+        $country = $request->request->get('country');
+
+        return new JsonResponse([
+            'data' => $co2SignalManager->getCarbonProgram($country)
+        ]);
     }
 }

@@ -9,7 +9,7 @@
 namespace App\Service;
 
 
-class AirQualityManager
+class AirQualityManager extends RequestManager
 {
 
     private $apiKey;
@@ -29,27 +29,6 @@ class AirQualityManager
         ];
     }
 
-    private function sendRequest(string $request)
-    {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $this->baseUri.$request);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
-
-
-        $headers = array();
-        $headers[] = 'Content-Type: application/json';
-        $headers[] = "x-access-token: $this->apiKey";
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-        $result = curl_exec($ch);
-        if (curl_errno($ch)) {
-            echo 'Error:' . curl_error($ch);
-        }
-        curl_close ($ch);
-
-        return json_decode($result);
-    }
 
     public function getAirQuality(\DateTime $date, ?string $country = "fr")
     {
@@ -57,8 +36,9 @@ class AirQualityManager
         $territory = $this->mapCountry[$country];
 
         $request = "/territory/$territory[0]/NUTS0/name/$territory[1]?timestamp=$currentDate&timeFormat=UTC";
+        $headers = ["Content-Type: application/json", "x-access-token: $this->apiKey"];
 
-        return $this->sendRequest($request);
+        return $this->sendRequest($request,$headers, $this->baseUri);
     }
 
 

@@ -9,7 +9,7 @@
 namespace App\Service;
 
 
-class OzaeManager
+class OzaeManager extends RequestManager
 {
     private $apiKey;
 
@@ -29,35 +29,13 @@ class OzaeManager
         ];
     }
 
-    private function sendRequest(string $request)
+    public function getComputedForSentence(\DateTime $startDate, \DateTime $endDate,?string $country = "us", ?string $keyword = "pollution", ?int $limit = 50)
     {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $this->baseUrl.$request);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
-
-
-        $headers = array();
-        $headers[] = 'Content-Type: application/json';
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-        $result = curl_exec($ch);
-        if (curl_errno($ch)) {
-            echo 'Error:' . curl_error($ch);
-        }
-        curl_close ($ch);
-
-        return json_decode($result);
-    }
-
-    public function getComputedForSentence(\DateTime $startDate, \DateTime $endDate, ?string $keyword = "pollution", ?int $limit = 20, ?string $country = "us")
-    {
-        //y-m-d
-        $startDate = ($startDate == $endDate) ? date('Ymd', strtotime('-6 month')) : $endDate->format('Ymd');
+        $startDate = $startDate->format('Ymd');
         $endDate = $endDate->format('Ymd');
         $country = $this->mapLang[$country];
 
-        $articles = $this->sendRequest("articles?date=".$startDate."__".$endDate."&key=$this->apiKey&edition=$country&query=$keyword&hard_limit=$limit");
+        $articles = $this->sendRequest("articles?date=".$startDate."__".$endDate."&key=$this->apiKey&edition=$country&query=$keyword&hard_limit=$limit", ['Content-Type: application/json'], $this->baseUrl);
 
         $compound = 0;
 
