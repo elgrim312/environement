@@ -241,13 +241,14 @@ body {
 }
 
 /*-- Footer --*/
-.footer{
+.footer {
     z-index: 200;
     position: fixed;
     bottom: 0;
     width: 100%;
     height: auto;
     fill: #A8C9AC;
+}
 
 .range {
     position: absolute;

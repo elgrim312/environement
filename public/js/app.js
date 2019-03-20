@@ -1,12 +1,21 @@
 
 
-
-$.ajax({
-    url: "test.html",
-    context: document.body
-}).done(function() {
-    $( this ).addClass( "done" );
+$( document ).ready(function() {
+    $.ajax({
+        url: "/airquality",
+        type: "POST",
+        data: { country: "fr", date : "0"},
+        success: function(result){
+            console.log(result);
+        },
+        error: function () {
+        console.log("error");
+    }});
 });
+
+
+
+
 
 particlesJS('particles-js',
 
