@@ -21,7 +21,7 @@ class VaderSentimentManager
 
     public function getSentiment(string $value) : array
     {
-        $value = strtr($value, [",", ";", "\\", "."]);
+        $value = strtr($value, [",", ";", "\\", ".", "%", "*"]);
 
        return $this->sentimenter->getSentiment($value);
     }

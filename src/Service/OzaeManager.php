@@ -9,43 +9,34 @@
 namespace App\Service;
 
 
-class OzaeManager
+class OzaeManager extends RequestManager
 {
     private $apiKey;
 
     private $sentimenter;
+
+    private $mapLang;
 
     public function __construct($ozaeKey, VaderSentimentManager $vaderSentimentManager)
     {
         $this->apiKey = $ozaeKey;
         $this->baseUrl = "https://api.ozae.com/gnw/";
         $this->sentimenter = $vaderSentimentManager;
+        $this->mapLang = [
+            "fr" => "fr-fr",
+            "dl" => "de-de",
+            "us" => "en-us-ny",
+        ];
     }
 
-    private function sendRequest(string $request)
+    public function getComputedForSentence(\DateTime $startDate, \DateTime $endDate,?string $country = "us", ?string $keyword = "pollution", ?int $limit = 50)
     {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $this->baseUrl.$request);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+        $startDate = $startDate->format('Ymd');
+        $endDate = $endDate->format('Ymd');
+        $country = $this->mapLang[$country];
 
+        $articles = $this->sendRequest("articles?date=".$startDate."__".$endDate."&key=$this->apiKey&edition=$country&query=$keyword&hard_limit=$limit", ['Content-Type: application/json'], $this->baseUrl);
 
-        $headers = array();
-        $headers[] = 'Content-Type: application/json';
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-        $result = curl_exec($ch);
-        if (curl_errno($ch)) {
-            echo 'Error:' . curl_error($ch);
-        }
-        curl_close ($ch);
-
-        return json_decode($result);
-    }
-
-    public function getComputedForBiodiversity(?string $keyword = "déforestation", ?int $limit = 20)
-    {
-        $articles = $this->sendRequest("articles?date=20180601__20180630&key=$this->apiKey&edition=en-us-ny&query=$keyword&hard_limit=$limit");
         $compound = 0;
 
         foreach ($articles->articles as $article) {
