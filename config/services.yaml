@@ -5,6 +5,8 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     ozae_key: '%env(OZAE_KEY)%'
+    airchecker_key: '%env(AIRCHECKER_KEY)%'
+    co2_signal: '%env(CO2SIGNAL_KEY)%'
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -26,6 +28,14 @@ services:
     App\Service\OzaeManager:
         arguments:
             $ozaeKey: '%ozae_key%'
+
+    App\Service\AirQualityManager:
+        arguments:
+            $aircheckerKey: '%airchecker_key%'
+
+    App\Service\Co2SignalManager:
+        arguments:
+            $c02Signal: '%co2_signal%'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
