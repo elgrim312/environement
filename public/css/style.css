@@ -57,7 +57,6 @@ canvas{
 /*-- water animation --*/
 
 body {
-  background:radial-gradient(ellipse at center, rgba(255,254,234,1) 0%, rgba(255,254,234,1) 35%, #B7E8EB 100%);
   overflow: hidden;
 }
 
@@ -154,38 +153,114 @@ body {
 
 /*-- Slider --*/
 
-input[type=range] {
-    -webkit-appearance: none;
-    border: 1px solid white;
-    width: 90%;
+.range {
     position: absolute;
-    bottom: 20px;
-    left: 5%;
-    border-radius: 10px;
-}
-
-input[type=range]::-webkit-slider-runnable-track {
-    width: 300px;
+    width: 360px;
     height: 5px;
-    background: #ddd;
-    border: none;
-    border-radius: 13px;
-}
+    bottom: 32px;
+    left: 252px;
 
-input[type=range]::-webkit-slider-thumb {
+}
+.range input {
+    width: 100%;
+    position: absolute;
+    top: 2px;
+    height: 0;
     -webkit-appearance: none;
-    border: 1px solid white;
-    height: 16px;
-    width: 16px;
+}
+.range input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    margin: -8px 0 0;
     border-radius: 50%;
-    background: greenyellow;
-    margin-top: -4px;
+    background: #37adbf;
+    cursor: pointer;
+    border: 0 !important;
 }
 
-input[type=range]:focus {
+.range input::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    margin: -8px 0 0;
+    border-radius: 50%;
+    background: #37adbf;
+    cursor: pointer;
+    border: 0 !important;
+}
+.range input::-ms-thumb {
+    width: 18px;
+    height: 18px;
+    margin: -8px 0 0;
+    border-radius: 50%;
+    background: #37adbf;
+    cursor: pointer;
+    border: 0 !important;
+}
+.range input::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 2px;
+    cursor: pointer;
+    background: #b2b2b2;
+}
+.range input::-moz-range-track {
+    width: 100%;
+    height: 2px;
+    cursor: pointer;
+    background: #b2b2b2;
+}
+.range input::-ms-track {
+    width: 100%;
+    height: 2px;
+    cursor: pointer;
+    background: #b2b2b2;
+}
+.range input:focus {
+    background: none;
     outline: none;
 }
-
-input[type=range]:focus::-webkit-slider-runnable-track {
-    background: #ccc;
+.range input::-ms-track {
+    width: 100%;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+}
+.range-labels {
+    margin: 18px -41px 0;
+    padding: 0;
+    list-style: none;
+    position: absolute;
+    bottom: 0;
+    left: 245px;
+}
+.range-labels li {
+    position: relative;
+    float: left;
+    width: 90.25px;
+    text-align: center;
+    color: #b2b2b2;
+    font-size: 14px;
+    cursor: pointer;
+}
+.range-labels li::before {
+    position: absolute;
+    top: -25px;
+    right: 0;
+    left: 0;
+    content: "";
+    margin: 0 auto;
+    width: 9px;
+    height: 9px;
+    background: #b2b2b2;
+    border-radius: 50%;
+}
+.range-labels .active {
+    color: #37adbf;
+}
+.range-labels .selected::before {
+    background: #37adbf;
+}
+.range-labels .active.selected::before {
+    display: none;
 }
