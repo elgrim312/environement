@@ -1,5 +1,6 @@
-<link rel="stylesheet" media="screen" href="../css/style.css">
+{% extends 'base.html.twig' %}
 
+{% block body %}
 <!-- Water animation -->
 <div class="ocean">
     <div class="wave"></div>
@@ -13,8 +14,16 @@
 </div>
 
 <!-- Slider -->
-<input type="range">
+<div class="range">
+    <input type="range" min="1" max="5" steps="1" value="5">
+</div>
 
-<!-- scripts -->
-<script type="text/javascript" src="../js/particles.js"></script>
-<script type="text/javascript" src="../js/app.js"></script>
+<ul class="range-labels">
+    <li>Il y a 24 mois</li>
+    <li>Il y a 12 mois</li>
+    <li>Il y a 6 mois</li>
+    <li>Il y a 2 mois</li>
+    <li class="active selected">Aujourd'hui</li>
+</ul>
+
+{% endblock %}
