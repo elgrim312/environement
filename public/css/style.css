@@ -231,48 +231,12 @@ body {
 }
 
 
-/*-- Slider --*/
-
-input[type=range] {
-    -webkit-appearance: none;
-    border: 1px solid white;
-    width: 90%;
-    position: absolute;
-    bottom: 20px;
-    left: 5%;
-    border-radius: 10px;
-}
-
-input[type=range]::-webkit-slider-runnable-track {
-    width: 300px;
-    height: 5px;
-    background: #ddd;
-    border: none;
-    border-radius: 13px;
-}
-
-input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    border: 1px solid white;
-    height: 16px;
-    width: 16px;
-    border-radius: 50%;
-    background: greenyellow;
-    margin-top: -4px;
-}
-
-input[type=range]:focus {
-    outline: none;
-}
-
-input[type=range]:focus::-webkit-slider-runnable-track {
-    background: #ccc;
-}
-
 /*-- Background --*/
 .background{
     z-index: 0;
-    height: 100%;
+    object-fit: fill;
     position: absolute;
+    width: auto;
+    height: 100%;
 
 }
