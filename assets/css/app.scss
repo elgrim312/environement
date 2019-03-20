@@ -44,9 +44,9 @@ canvas{
     vertical-align:bottom;
 }
 
-/* ---- particles.js container ---- */
+<!-- particles.js container -->
 
-#particles-js{
+#particles-js {
     position: absolute;
     width: 90%;
     z-index: 1;
@@ -54,12 +54,12 @@ canvas{
     bottom: 7px;
 }
 
-/*-- water animation --*/
+<!-- water animation -->
 
-body {
+/* body {
   background:radial-gradient(ellipse at center, rgba(255,254,234,1) 0%, rgba(255,254,234,1) 35%, #B7E8EB 100%);
   overflow: hidden;
-}
+} */
 
 .ocean {
     width:100%;
@@ -104,7 +104,7 @@ body {
     }
 }
 
-/*-- Cloud --*/
+<!-- Cloud -->
 #clouds{
     position: absolute;
     top: 30%;
@@ -152,7 +152,7 @@ body {
     top: -14px;
 }
 
-/*-- Slider --*/
+<!--Slider -->
 
 input[type=range] {
     -webkit-appearance: none;
