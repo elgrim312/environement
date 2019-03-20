@@ -48,4 +48,12 @@ class OzaeManager extends RequestManager
 
         return $compound;
     }
+
+    public function getRelatedArticle($startDate, $endDate, $country)
+    {
+        $startDate = $startDate->format('Ymd');
+        $endDate = $endDate->format('Ymd');
+
+        $article = $this->sendRequest("?articles?date".$startDate."__".$endDate."&key=$this->apiKey&edition=$country&query=Pollution%de%l'eau&hard_limit=1");
+    }
 }
