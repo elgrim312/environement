@@ -8,6 +8,7 @@
 /vendor/
 .idea
 .idea/*
+.DS_Stores
 .DS_Store
 .env
 .DS_Stores
