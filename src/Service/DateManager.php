@@ -17,4 +17,11 @@ class DateManager
 
         return $start->modify('-1 days');
     }
+
+    public function getLastNMonth($n) : \DateTime
+    {
+        $start = new \DateTime();
+
+        return $start->modify("$n month");
+    }
 }
