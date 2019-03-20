@@ -9,6 +9,7 @@
 .idea
 .idea/*
 .DS_Store
+.env
 ###< symfony/framework-bundle ###
 
 ###> symfony/webpack-encore-bundle ###
