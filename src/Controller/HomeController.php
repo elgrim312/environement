@@ -16,14 +16,13 @@ class HomeController extends AbstractController
     public function index(OzaeManager $ozaeManager, AirQualityManager $airQualityManager, DateManager $dateManager)
     {
         $currentDate = new \DateTime();
-        $airQuality = $airQualityManager->getAirQuality($dateManager->getLastDay());
-        dump($airQuality);die;
 
+        $airQuality = $airQualityManager->getAirQuality($dateManager->getLastDay());
         $biodiversityScore = $ozaeManager->getComputedForSentence($currentDate, $currentDate);
-        $waterQuality = $ozaeManager->getComputedForSentence($currentDate, $currentDate, "pollution eau");
 
         return $this->render('index.html.twig', [
-            'biodiversityScore' => $biodiversityScore
+            'biodiversityScore' => $biodiversityScore,
+            'airQuality' => $airQuality
         ]);
     }
 }
