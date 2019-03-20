@@ -16,7 +16,7 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="app_index")
      */
-    public function index(OzaeManager $ozaeManager)
+    public function index()
     {
         return $this->render('index.html.twig');
     }
@@ -55,7 +55,7 @@ class HomeController extends AbstractController
      */
     public function getCarbonEvolution(Co2SignalManager $co2SignalManager, Request $request)
     {
-        $country = $request->request->get('country');
+        $country = strtoupper($request->request->get('country'));
 
         return new JsonResponse([
             'data' => $co2SignalManager->getCarbonProgram($country)

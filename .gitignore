@@ -11,6 +11,8 @@
 .DS_Stores
 .DS_Store
 .env
+.DS_Stores
+
 ###< symfony/framework-bundle ###
 
 ###> symfony/webpack-encore-bundle ###
