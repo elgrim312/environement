@@ -36,11 +36,8 @@ html{
 
 body{
     font:normal 75% Arial, Helvetica, sans-serif;
-    /*background: linear-gradient(#c9dbe9 0%, #fff 100%);*/
-    background: url(/public/img/fond.svg);
-    height: 500px;
-    width: 500px;
-    background-size: cover;
+    background: url(/img/fond.svg) bottom center;
+    background-size:cover;
 }
 
 canvas{
@@ -112,7 +109,7 @@ body {
 /*-- Cloud --*/
 #clouds{
     position: absolute;
-    top: 30%;
+    bottom: 36%;
     left: 19%;
 }
 
@@ -120,7 +117,7 @@ body {
 .cloud {
     width: 200px; height: 60px;
     background: #fff;
-
+    transition: all 1s;
     border-radius: 200px;
     -moz-border-radius: 200px;
     -webkit-border-radius: 200px;
@@ -162,12 +159,13 @@ body {
     width:9rem;
     height:9rem;
     border-radius:50%;
-    fill: #f9f9d4 !important;
+    fill: #f9f9d4;
     stroke: #f9f9d4;
     transform-origin: 50% 50%;
     position: fixed;
     top: 12%;
     right: 15%;
+    transition: all 1s;
 
 }
 /*-- TREES --*/
@@ -190,9 +188,28 @@ body {
 
 .tree2{
     z-index: 5;
-    bottom: 8rem;
-    right: 9rem;
+    bottom: 7rem;
+    right: 10rem;
     transform: rotate(-5deg);
+}
+
+.rond{
+    position: absolute;
+    right: 1rem;
+    bottom: 11rem;
+    width: 122px;
+    height: auto;
+    transition: all 1s;
+}
+
+.pointu{
+    position: absolute;
+    right: 9.2rem;
+    bottom: 11rem;
+    width: 70px;
+    height: auto;
+    transition: all 1s;
+    transform: rotate(-6deg);
 }
 
 .pulse {
