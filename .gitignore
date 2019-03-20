@@ -8,6 +8,5 @@
 /vendor/
 .idea
 .idea/*
-.DS_Store
-.gitignore
+.DS_Stores
 ###< symfony/framework-bundle ###
