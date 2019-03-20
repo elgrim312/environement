@@ -36,7 +36,11 @@ html{
 
 body{
     font:normal 75% Arial, Helvetica, sans-serif;
-    background: linear-gradient(#c9dbe9 0%, #fff 100%);
+    /*background: linear-gradient(#c9dbe9 0%, #fff 100%);*/
+    background: url(/public/img/fond.svg);
+    height: 500px;
+    width: 500px;
+    background-size: cover;
 }
 
 canvas{
@@ -65,6 +69,8 @@ body {
     position:absolute;
     bottom: -50px;
     left:0;
+    display: none;
+
 }
 
 .wave {
@@ -107,7 +113,7 @@ body {
 #clouds{
     position: absolute;
     top: 30%;
-    right: 20px;
+    left: 19%;
 }
 
 /*Time to finalise the cloud shape*/
@@ -151,7 +157,97 @@ body {
     top: -14px;
 }
 
-/*-- Slider --*/
+/*-- SUN --*/
+.sun{
+    width:9rem;
+    height:9rem;
+    border-radius:50%;
+    fill: #f9f9d4 !important;
+    stroke: #f9f9d4;
+    transform-origin: 50% 50%;
+    position: fixed;
+    top: 12%;
+    right: 15%;
+
+}
+/*-- TREES --*/
+
+.tree1,
+.tree2 {
+    fill: #b29b6e !important;
+    height: 9rem;
+    width: auto;
+    position: absolute;
+}
+
+.tree1{
+    z-index: 3;
+    bottom: 8.5rem;
+    right: 3rem;
+    transform: rotate(-2deg);
+
+}
+
+.tree2{
+    z-index: 5;
+    bottom: 8rem;
+    right: 9rem;
+    transform: rotate(-5deg);
+}
+
+.pulse {
+    animation-name: pulse_animation;
+    animation-duration: 5000ms;
+    transform-origin:70% 70%;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+
+@keyframes pulse_animation {
+    0% { transform: scale(1); }
+    30% { transform: scale(1.04); }
+    40% { transform: scale(1.08); }
+    50% { transform: scale(1.04); }
+    60% { transform: scale(1.03); }
+    70% { transform: scale(1.05); }
+    80% { transform: scale(1.03); }
+    100% { transform: scale(1); }
+}
+
+/*-- Hill --*/
+.grass {
+    background-color: #9DBAA0;
+    height: 17rem;
+    position: absolute;
+    z-index: 4;
+    bottom: -135px;
+    width: 65%;
+    border-radius: 82% 24%;
+    right: -14%;
+    -webkit-transform: rotate(-5deg);
+    transform: rotate(-5deg);
+}
+
+
+/*-- Background --*/
+.background{
+    z-index: 0;
+    object-fit: fill;
+    position: absolute;
+    width: auto;
+    height: 100%;
+
+}
+
+/*-- Footer --*/
+.footer{
+    z-index: 200;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+    fill: #A8C9AC;
 
 .range {
     position: absolute;
