@@ -195,7 +195,7 @@ var getTrackStyle = function (el) {
 
     // Change background gradient
     for (var i = 0; i < prefs.length; i++) {
-        style += '.range {background: linear-gradient(to right, #37adbf 0%, #37adbf ' + val + '%, #A8C9AC ' + val + '%, #A8C9AC 100%)}';
+        style += '.range {background: linear-gradient(to right, #37adbf 0%, #37adbf ' + val + '%, #a6d9ac ' + val + '%, #a6d9ac 100%)}';
         style += '.range input::-' + prefs[i] + '{background: linear-gradient(to right, #37adbf 0%, #37adbf ' + val + '%, #000 ' + val + '%, #000 100%)}';
     }
 
@@ -211,10 +211,4 @@ $('.range-labels li').on('click', function () {
     var index = $(this).index();
 
     $rangeInput.val(index + 1).trigger('input');
-});
-
-//get slider value
-$('.by-range').on('click', function() {
-    var valslider = $(this).data('month');
-    console.log(valslider);
 });

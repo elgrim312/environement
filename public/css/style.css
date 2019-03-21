@@ -107,10 +107,10 @@ canvas{
 }
 
 .wave1 {
-    background: url('http://www.templates-preview.com/bootstrap-templates/300111854/images/wave1.png') 0 0 repeat-x;
+    background-image: url('/img/wave2.svg') 0 0 repeat-x;
 }
 .wave2 {
-    background: url('http://www.templates-preview.com/bootstrap-templates/300111854/images/wave2.png') 0 0 repeat-x;
+    background: url('/img/wave2.svg') 0 0 repeat-x;
 }
 
 /*-- Cloud --*/
@@ -277,7 +277,7 @@ canvas{
     position: absolute;
     width: 360px;
     height: 5px;
-    bottom: 37px;
+    bottom: 17px;
     left: 35%;
     z-index: 201;
 
@@ -286,7 +286,7 @@ canvas{
 .range input {
     width: 100%;
     position: absolute;
-    top: 2px;
+    top: -1px;
     height: 0;
     -webkit-appearance: none;
 }
@@ -366,10 +366,11 @@ canvas{
     color: black;
     font-size: 14px;
     cursor: pointer;
+    bottom: 40px;
 }
 .range-labels li::before {
     position: absolute;
-    top: -25px;
+    top: 35px;
     right: 0;
     left: 0;
     content: "";
@@ -379,6 +380,7 @@ canvas{
     background: #b2b2b2;
     border-radius: 50%;
 }
+
 .range-labels .active {
     color: #37adbf;
 }
