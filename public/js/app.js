@@ -66,7 +66,7 @@ particlesJS('particles-js',
                 }
             },
             "color": {
-                "value": "#000000"
+                "value": "#c8d1cf"
             },
             "shape": {
                 "type": "circle",
@@ -212,3 +212,31 @@ $('.range-labels li').on('click', function () {
 
     $rangeInput.val(index + 1).trigger('input');
 });
+
+$('.open').on('click', function() {
+
+    var current = $(this);
+    var type = $(this).data("type");
+    var date = '0';
+    var country = 'fr';
+
+
+   $('.modal').css('display', 'block');
+   $('.modal').css('opacity', '1');
+
+    $.ajax({
+        url: "/related-article",
+        type: "POST",
+        data: { country: country, date : date, type: type},
+        success: function (result) {
+            current.innerHTML = result;
+            console.log(result)
+        }
+    });
+});
+
+$('.close').on('click', function() {
+   $('.modal').css('display', 'none');
+});
+
+

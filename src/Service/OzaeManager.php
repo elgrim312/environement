@@ -49,12 +49,11 @@ class OzaeManager extends RequestManager
         return $compound;
     }
 
-    public function getRelatedArticles($startDate, $endDate, $country)
+    public function getRelatedArticles($startDate, $endDate, $country, $type)
     {
         $startDate = $startDate->format('Ymd');
         $endDate = $endDate->format('Ymd');
 
-        $data = [];
         $keywords = [
             'biodiversity' => [
                 'fr' => ['biodiversité', 'fr-fr'],
@@ -82,12 +81,10 @@ class OzaeManager extends RequestManager
             ]
         ];
 
-        foreach ($keywords as $keyword) {
-            $lang = $keyword[$country][1];
-            $word = $keyword[$country][0];
-            $data[] = $this->sendRequest("articles?date=".$startDate."__".$endDate."&key=$this->apiKey&edition=$lang&query=$word&hard_limit=1", ['Content-Type: application/json'], $this->baseUrl );
-        }
 
-        return $data;
+        $lang = $keywords[$type][$country][1];
+        $word = $keywords[$type][$country][0];
+
+        return $this->sendRequest("articles?date=".$startDate."__".$endDate."&key=$this->apiKey&edition=$lang&query=$word&hard_limit=0", ['Content-Type: application/json'], $this->baseUrl );
     }
 }
