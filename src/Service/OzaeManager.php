@@ -53,7 +53,8 @@ class OzaeManager extends RequestManager
     {
         $startDate = $startDate->format('Ymd');
         $endDate = $endDate->format('Ymd');
+        $article = $this->sendRequest("articles?date=".$startDate."__".$endDate."&key=$this->apiKey&edition=$country&query=pollution&hard_limit=1", ['Content-Type: application/json'], $this->baseUrl );
 
-        $article = $this->sendRequest("?articles?date".$startDate."__".$endDate."&key=$this->apiKey&edition=$country&query=Pollution%de%l'eau&hard_limit=1");
+        dump($article);die;
     }
 }

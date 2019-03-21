@@ -16,8 +16,10 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="app_index")
      */
-    public function index()
+    public function index(OzaeManager $ozaeManager, DateManager $dateManager)
     {
+        $ozaeManager->getRelatedArticle($dateManager->getLastNMonth("-42"), new \DateTime(), "fr");
+
         return $this->render('index.html.twig');
     }
 
