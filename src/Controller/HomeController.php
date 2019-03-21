@@ -19,8 +19,6 @@ class HomeController extends AbstractController
      */
     public function index(WaterManager $waterManager)
     {
-        $data = $waterManager->getWaterValue("de","2017");
-        dump($data);die;
         return $this->render('index.html.twig');
     }
 
