@@ -71,6 +71,7 @@ class HomeController extends AbstractController
     {
         $country = $request->request->get('country');
         $date = $request->request->get('date');
+        $type = $request->request->get('type');
 
         switch ($date) {
             case "0" :
@@ -94,9 +95,9 @@ class HomeController extends AbstractController
             break;
         }
 
-        return new JsonResponse([
-            'data' => $ozaeManager->getRelatedArticles($startDate, $endDate, $country)
-        ], 200);
+        return $this->render('modal-content.html.twig', [
+            'articles' => $ozaeManager->getRelatedArticles($startDate, $endDate, $country, $type)
+        ]);
     }
 
     /**

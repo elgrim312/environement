@@ -228,4 +228,92 @@ particlesJS('particles-js',
     }
 );
 
+$(function(){
+    $('.button-water').on('click', function(){
+        $('.overlay').addClass('show');
+        $('.modal').addClass('show');
+
+        var country = $('.country-element').attr('id');
+        var date = current_date;
+
+        $.ajax({
+            url: "/related-article",
+            type: "POST",
+            data: { country: country, date : date, type: "waterPollution"},
+            success: function(result){
+                console.log(result);
+               $('.modal__content-val').html(result);
+            },
+            error: function () {
+            }});
+    });
+
+    $('.button-trees').on('click', function(){
+        $('.overlay').addClass('show');
+        $('.modal').addClass('show');
+
+        var country = $('.country-element').attr('id');
+        var date = current_date;
+
+        $.ajax({
+            url: "/related-article",
+            type: "POST",
+            data: { country: country, date : date, type: "biodiversity"},
+            success: function(result){
+                console.log(result);
+                $('.modal__content-val').html(result);
+            },
+            error: function () {
+            }});
+    });
+
+    $('.button-clouds').on('click', function(){
+        $('.overlay').addClass('show');
+        $('.modal').addClass('show');
+
+        var country = $('.country-element').attr('id');
+        var date = current_date;
+
+        $.ajax({
+            url: "/related-article",
+            type: "POST",
+            data: { country: country, date : date, type: "airQualiy"},
+            success: function(result){
+                console.log(result);
+                $('.modal__content-val').html(result);
+            },
+            error: function () {
+            }});
+    });
+
+    $('.button-sun').on('click', function(){
+        $('.overlay').addClass('show');
+        $('.modal').addClass('show');
+
+        var country = $('.country-element').attr('id');
+        var date = current_date;
+
+        $.ajax({
+            url: "/related-article",
+            type: "POST",
+            data: { country: country, date : date, type: "climat"},
+            success: function(result){
+                console.log(result);
+                $('.modal__content-val').html(result);
+            },
+            error: function () {
+            }});
+    });
+
+    $('.overlay').on('click', function(){
+        $(this).removeClass('show');
+        $('.modal').removeClass('show');
+    })
+
+    $('.arrow').on('click', function () {
+        $('.overlay').removeClass('show');
+        $('.modal').removeClass('show');
+    })
+});
+
 
