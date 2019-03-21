@@ -1,5 +1,47 @@
+var current_country = 'fr';
+var current_date = '0';
+
 $( document ).ready(function() {
-    fetchdata('fr','0');
+    fetchdata(current_country,current_date);
+
+    let my_range = $(".js-range-slider").data("ionRangeSlider");
+    $(".js-range-slider").ionRangeSlider({
+        skin: "square",
+        min: 0,
+        max: 5,
+        values: ['2 ans','1 an','6 mois', '2 mois', 'Aujourd\'hui'],
+        onFinish: function (data) {
+
+            switch (data.from_value) {
+                case '2 ans':
+                    current_date = '-24';
+                    break;
+                case '1 an':
+                    current_date = '-12';
+                    break;
+                case '6 mois':
+                    current_date = '-6';
+                    break;
+                case '2 mois':
+                    current_date = '-2';
+                    break;
+                case 'Aujourd\'hui':
+                    current_date = '0';
+                    break;
+                default:
+                    current_date = '0';
+            }
+            fetchdata(current_country,current_date);
+        },
+    });
+});
+
+
+$('.country-element').click(function(){
+        current_country = $(this).attr('id');
+        fetchdata(current_country,'0');
+        my_range.reset();
+
 });
 
 function fetchdata(country, date){
@@ -14,7 +56,6 @@ function fetchdata(country, date){
             }
         },
         error: function () {
-            console.log("error");
         }});
 
     // AIRQUALITY
@@ -28,11 +69,12 @@ function fetchdata(country, date){
             .css('height',calculatedResult*2)
             .css('fill', 'rgb(255, 102, 51)')
             .css('stroke', 'rgb(255, 102, 51)')
-            .css('fill-opacity', calculatedResult/100);
-            $('.sun').css('stroke-opacity', calculatedResult/100);
+            .css('fill-opacity', calculatedResult/100)
+            .css('stroke-opacity', calculatedResult/100)
+            .css('animation-duration',(100%calculatedResult)*100 +'ms' );
+
         },
         error: function () {
-            console.log("error");
         }});
 
     $.ajax({
@@ -49,7 +91,6 @@ function fetchdata(country, date){
 
         },
         error: function () {
-            console.log("error");
         }});
 
 }
@@ -173,45 +214,6 @@ particlesJS('particles-js',
         }
     }
 );
-
-var sheet = document.createElement('style'),
-    $rangeInput = $('.range input'),
-    prefs = ['webkit-slider-runnable-track', 'moz-range-track', 'ms-track'];
-
-document.body.appendChild(sheet);
-
-var getTrackStyle = function (el) {
-    var curVal = el.value,
-        val = (curVal - 1) * 25,
-        style = '';
-
-    // Set active label
-    $('.range-labels li').removeClass('active selected');
-
-    var curLabel = $('.range-labels').find('li:nth-child(' + curVal + ')');
-
-    curLabel.addClass('active selected');
-    curLabel.prevAll().addClass('selected');
-
-    // Change background gradient
-    for (var i = 0; i < prefs.length; i++) {
-        style += '.range {background: linear-gradient(to right, #37adbf 0%, #37adbf ' + val + '%, #A8C9AC ' + val + '%, #A8C9AC 100%)}';
-        style += '.range input::-' + prefs[i] + '{background: linear-gradient(to right, #37adbf 0%, #37adbf ' + val + '%, #000 ' + val + '%, #000 100%)}';
-    }
-
-    return style;
-}
-
-$rangeInput.on('input', function () {
-    sheet.textContent = getTrackStyle(this);
-});
-
-// Change input value on label click
-$('.range-labels li').on('click', function () {
-    var index = $(this).index();
-
-    $rangeInput.val(index + 1).trigger('input');
-});
 
 //get slider value
 $('.by-range').on('click', function() {
