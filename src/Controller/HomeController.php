@@ -17,7 +17,7 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="app_index")
      */
-    public function index(WaterManager $waterManager)
+    public function index()
     {
         return $this->render('index.html.twig');
     }
@@ -28,9 +28,8 @@ class HomeController extends AbstractController
     public function getAirQuality(AirQualityManager $airQualityManager, DateManager $dateManager, Request $request)
     {
         $country = $request->get('country');
-        $date = $request->get('date');
 
-        $date = ($date == 0) ? $dateManager->getLastDay() : $dateManager->getLastNMonth($date);
+        $date = $dateManager->getLastDay();
 
         return new JsonResponse([
             'data' => $airQualityManager->getAirQuality($date, $country),
