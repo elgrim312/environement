@@ -70,12 +70,9 @@ canvas{
     width: 100%;
     z-index: 12;
     left: 0;
-    bottom: 67px;
+    bottom: 56px;
 }
 
-.wave1 {
-    animation: wave-animation1 8.7s infinite linear;
-}
 .wave2 {
     animation: wave-animation1 6.3s infinite linear;
 }
@@ -113,9 +110,6 @@ canvas{
     }
 }
 
-.wave1 {
-    background-image: url('/img/wave2.svg') 0 0 repeat-x;
-}
 .wave2 {
     background: url('/img/wave2.svg') 0 0 repeat-x;
 }
@@ -320,6 +314,10 @@ canvas{
     bottom: 40px;
 }
 
+.country-list li:hover{
+    opacity: 0.7;
+}
+
 
 .country-flag{
     width: 30px;
@@ -352,3 +350,83 @@ canvas{
     background-color: #fff !important;
 }
 
+/*button*/
+
+.container {
+    position: absolute;
+    transform: translate(-50%,-50%);
+    margin: 0 auto 0;
+    z-index: 220;
+}
+
+.button--pulse {
+    position: relative;
+    display: block;
+    border: 1px solid white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    -webkit-animation: pulse 1.5s infinite cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    animation: pulse 1.5s infinite cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.button--pulse::before {
+    content: '';
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: white;
+    position: absolute;
+    box-shadow: 0 0 0 0 rgba(255,255,255, .5);
+    left: 50%;
+    top: 50%;
+    -ms-transform: translate(-50%,-50%); /* IE 9 */
+    -webkit-transform: translate(-50%,-50%); /* Safari and Chrome */
+    transform: translate(-50%,-50%);
+    -webkit-animation: pulse-shadow 1.5s infinite cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    animation: pulse-shadow 1.5s infinite cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(.8);
+    }
+    70% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(.8);
+    }
+}
+
+@keyframes pulse-shadow {
+    0% {}
+    70% {
+        box-shadow: 0 0 0 20px rgba(255,255,255, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255,255,255, 0);
+    }
+}
+
+.button-water{
+    right: 54%;
+    bottom: 8%;
+}
+
+.button-clouds{
+    top: 66%;
+    left: 16%;
+}
+
+.button-sun{
+    top: 12%;
+    right: 7%;
+}
+
+.button-trees{
+    bottom: 9%;
+    right: 4%;
+}

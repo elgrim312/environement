@@ -105,7 +105,7 @@ class HomeController extends AbstractController
     public function getWaterValue(WaterManager $waterManager, Request $request, DateManager $dateManager)
     {
         $date = $request->request->get('date');
-        $country = $request->request->get('request');
+        $country = $request->request->get('country');
 
         $currentDate =$date == 0 ? new \DateTime() : $dateManager->getLastNMonth($date);
 

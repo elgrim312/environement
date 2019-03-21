@@ -66,12 +66,12 @@ function fetchdata(country, date){
         data: { country: country},
         success: function(result){
             calculatedResult = result.data.data.carbonIntensity;
-            $('.sun').css('width',calculatedResult*2)
-            .css('height',calculatedResult*2)
+            $('.sun').css('width',calculatedResult)
+            .css('height',calculatedResult)
             .css('fill', 'rgb(255, 102, 51)')
             .css('stroke', 'rgb(255, 102, 51)')
-            .css('fill-opacity', calculatedResult/100)
-            .css('stroke-opacity', calculatedResult/100)
+            .css('fill-opacity', calculatedResult/1000)
+            .css('stroke-opacity', calculatedResult/1000)
             .css('animation-duration',(100%calculatedResult)*100 +'ms' );
 
         },
@@ -93,6 +93,18 @@ function fetchdata(country, date){
         },
         error: function () {
         }});
+
+    $.ajax({
+        url: "/water-quality",
+        type: "POST",
+        data: { country: country, date : date},
+        success: function(result){
+           $('.wave2').css('animation','wave-animation1 '+result.data/10 +'s infinite linear')
+
+        },
+        error: function () {
+        }});
+
 
 }
 
