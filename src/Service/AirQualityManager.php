@@ -24,7 +24,7 @@ class AirQualityManager extends RequestManager
         $this->baseUri = 'https://api.aircheckr.com';
         $this->mapCountry = [
             "fr" => ['FR', 'FRANCE'],
-            'dl' => ['DE', 'GERMANY'],
+            'de' => ['DE', 'GERMANY'],
             'us' => ['BE', 'TURKEY'],
             'br' => ['NL', 'TURKEY'],
         ];

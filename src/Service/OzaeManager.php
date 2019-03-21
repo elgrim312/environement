@@ -24,8 +24,9 @@ class OzaeManager extends RequestManager
         $this->sentimenter = $vaderSentimentManager;
         $this->mapLang = [
             "fr" => "fr-fr",
-            "dl" => "de-de",
+            "de" => "de-de",
             "us" => "en-us-ny",
+            "br" => "en-us-sl"
         ];
     }
 

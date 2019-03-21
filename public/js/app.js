@@ -41,6 +41,13 @@ $( document ).ready(function() {
 $('.country-element').click(function(){
         current_country = $(this).attr('id');
         $('.country-flag').css('background','url(/img/'+current_country+'.svg)  center').css('background-size','cover');
+        var countries = $('.country-element');
+
+        for (var i = 0; i <= countries.length; i++) {
+            $(countries[i]).removeClass('current__country')
+        }
+
+        $(this).addClass('current__country');
         fetchdata(current_country,'0');
         $(".js-range-slider").data("ionRangeSlider").reset();
 });
@@ -232,9 +239,9 @@ $(function(){
     $('.button-water').on('click', function(){
         $('.overlay').addClass('show');
         $('.modal').addClass('show');
-
-        var country = $('.country-element').attr('id');
+        var country = $('.current__country').attr('id');
         var date = current_date;
+        console.log(country);
 
         $.ajax({
             url: "/related-article",
@@ -252,7 +259,7 @@ $(function(){
         $('.overlay').addClass('show');
         $('.modal').addClass('show');
 
-        var country = $('.country-element').attr('id');
+        var country = $('.current__country').attr('id');
         var date = current_date;
 
         $.ajax({
@@ -271,7 +278,7 @@ $(function(){
         $('.overlay').addClass('show');
         $('.modal').addClass('show');
 
-        var country = $('.country-element').attr('id');
+        var country = $('.current__country').attr('id');
         var date = current_date;
 
         $.ajax({
@@ -290,7 +297,7 @@ $(function(){
         $('.overlay').addClass('show');
         $('.modal').addClass('show');
 
-        var country = $('.country-element').attr('id');
+        var country = $('.current__country').attr('id');
         var date = current_date;
 
         $.ajax({
