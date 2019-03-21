@@ -25,8 +25,8 @@ class AirQualityManager extends RequestManager
         $this->mapCountry = [
             "fr" => ['FR', 'FRANCE'],
             'dl' => ['DE', 'GERMANY'],
-            'us' => ['TR', 'TURKEY'],
-            'br' => ['TR', 'TURKEY'],
+            'us' => ['BE', 'TURKEY'],
+            'br' => ['NL', 'TURKEY'],
         ];
     }
 

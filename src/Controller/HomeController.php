@@ -6,6 +6,7 @@ use App\Service\AirQualityManager;
 use App\Service\Co2SignalManager;
 use App\Service\DateManager;
 use App\Service\OzaeManager;
+use App\Service\WaterManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,8 +17,10 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="app_index")
      */
-    public function index()
+    public function index(WaterManager $waterManager)
     {
+        $data = $waterManager->getWaterValue("de","2017");
+        dump($data);die;
         return $this->render('index.html.twig');
     }
 
@@ -96,6 +99,21 @@ class HomeController extends AbstractController
 
         return new JsonResponse([
             'data' => $ozaeManager->getRelatedArticles($startDate, $endDate, $country)
+        ], 200);
+    }
+
+    /**
+     * @Route("/water-quality", name="app_index_water_quality", methods={"POST"})
+     */
+    public function getWaterValue(WaterManager $waterManager, Request $request, DateManager $dateManager)
+    {
+        $date = $request->request->get('date');
+        $country = $request->request->get('request');
+
+        $currentDate =$date == 0 ? new \DateTime() : $dateManager->getLastNMonth($date);
+
+        return new JsonResponse([
+            'data' => $waterManager->getWaterValue($country, $currentDate->format("Y")),
         ], 200);
     }
 }
