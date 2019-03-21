@@ -238,6 +238,7 @@ $(function(){
         $('.overlay').addClass('show');
         $('.modal').addClass('show');
 
+
         var country = $('.country-element').attr('id');
         var date = current_date;
 
@@ -256,6 +257,8 @@ $(function(){
     $('.button-trees').on('click', function(){
         $('.overlay').addClass('show');
         $('.modal').addClass('show');
+        $('.content__article').css('display','flex');
+
 
         var country = $('.country-element').attr('id');
         var date = current_date;
@@ -275,6 +278,8 @@ $(function(){
     $('.button-clouds').on('click', function(){
         $('.overlay').addClass('show');
         $('.modal').addClass('show');
+        $('.content__article').css('display','flex');
+
 
         var country = $('.country-element').attr('id');
         var date = current_date;
@@ -294,6 +299,7 @@ $(function(){
     $('.button-sun').on('click', function(){
         $('.overlay').addClass('show');
         $('.modal').addClass('show');
+        $('.content__article').css('display','flex');
 
         var country = $('.country-element').attr('id');
         var date = current_date;
@@ -313,6 +319,7 @@ $(function(){
     $('.overlay').on('click', function(){
         $(this).removeClass('show');
         $('.modal').removeClass('show');
+        $('.content__article').css('display','none');
     })
 
     $('.arrow').on('click', function () {
