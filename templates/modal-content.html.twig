@@ -1,0 +1,7 @@
+{% set article = articles.articles[0] %}
+<div class="content__article">
+    <h3 class="article__title">{{ article.name }}</h3>
+    <span class="article__author">{{ article.source.domain }}</span>
+    <img src="{{ article.img_uri }}" class="article__img" alt="">
+    <a href="{{ article.url }}"  class="article__btn" target="_blank">Lire l'article</a>
+</div>
