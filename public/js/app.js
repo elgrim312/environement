@@ -1,9 +1,12 @@
 var current_country = 'fr';
 var current_date = '0';
+var carbon;
+var airqual;
+var biodiv;
+var waterqual;
 
 $( document ).ready(function() {
     fetchdata(current_country,current_date);
-
 
     $(".js-range-slider").ionRangeSlider({
         skin: "square",
@@ -52,6 +55,10 @@ $('.country-element').click(function(){
         $(".js-range-slider").data("ionRangeSlider").reset();
 });
 
+$('.overlay').click(function() {
+   $('.overlay').css('display', 'none');
+});
+
 function fetchdata(country, date){
     // AIRQUALITY
     $.ajax({
@@ -62,11 +69,12 @@ function fetchdata(country, date){
             if (result.data.data[0].aqi_101>=50){
                 $('.cloud').css('background-color','grey');
             }
+            airqual = result.data.data[0].aqi_101;
         },
         error: function () {
         }});
 
-    // AIRQUALITY
+    // CARBON
     $.ajax({
         url: "/carbonEvolution",
         type: "POST",
@@ -78,9 +86,10 @@ function fetchdata(country, date){
             .css('fill', 'rgb(255, 102, 51)')
             .css('stroke', 'rgb(255, 102, 51)')
             .css('fill-opacity', calculatedResult/1000)
-            .css('stroke-opacity', calculatedResult/1000)
+            .css('stroke-opacity', calculatedResult/1000 + '!important')
             .css('animation-duration',(100%calculatedResult)*100 +'ms' );
 
+          carbon  = calculatedResult;
         },
         error: function () {
         }});
@@ -92,11 +101,9 @@ function fetchdata(country, date){
         success: function(result){
             if(result.data <= 0){
                 $('.rond').css('fill-opacity','0');
-            }
-            if(result.data <= -0.05){
                 $('.pointu').css('fill-opacity','0');
             }
-
+            biodiv= result.data * 100;
         },
         error: function () {
         }});
@@ -107,12 +114,14 @@ function fetchdata(country, date){
         data: { country: country, date : date},
         success: function(result){
            $('.wave2').css('animation','wave-animation1 '+result.data/10 +'s infinite linear')
-
+           waterqual  = result.data;
         },
         error: function () {
         }});
 
 
+    var globalindex = (airqual + waterqual + biodiv );
+   console.log(globalindex);
 }
 
 particlesJS('particles-js',
@@ -239,7 +248,7 @@ $(function(){
     $('.button-water').on('click', function(){
         $('.overlay').addClass('show');
         $('.modal').addClass('show');
-        var country = $('.current__country').attr('id');
+        var country = $('.country-element').attr('id');
         var date = current_date;
         console.log(country);
 
@@ -258,6 +267,8 @@ $(function(){
     $('.button-trees').on('click', function(){
         $('.overlay').addClass('show');
         $('.modal').addClass('show');
+        $('.content__article').css('display','flex');
+
 
         var country = $('.current__country').attr('id');
         var date = current_date;
@@ -277,6 +288,8 @@ $(function(){
     $('.button-clouds').on('click', function(){
         $('.overlay').addClass('show');
         $('.modal').addClass('show');
+        $('.content__article').css('display','flex');
+
 
         var country = $('.current__country').attr('id');
         var date = current_date;
@@ -296,6 +309,7 @@ $(function(){
     $('.button-sun').on('click', function(){
         $('.overlay').addClass('show');
         $('.modal').addClass('show');
+        $('.content__article').css('display','flex');
 
         var country = $('.current__country').attr('id');
         var date = current_date;
@@ -315,6 +329,7 @@ $(function(){
     $('.overlay').on('click', function(){
         $(this).removeClass('show');
         $('.modal').removeClass('show');
+        $('.content__article').css('display','none');
     })
 
     $('.arrow').on('click', function () {
