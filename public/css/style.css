@@ -57,7 +57,7 @@ canvas{
 }
 
 /*-- water animation --*/
-.wave1, .wave2 {
+.wave2 {
     height: 30px;
     position: absolute;
     width: 100%;
@@ -66,9 +66,6 @@ canvas{
     bottom: 67px;
 }
 
-.wave1 {
-    animation: wave-animation1 8.7s infinite linear;
-}
 .wave2 {
     animation: wave-animation1 6.3s infinite linear;
 }
@@ -226,8 +223,6 @@ canvas{
     animation-timing-function: ease-in-out;
 }
 
-
-
 @keyframes pulse_animation {
     0% { transform: scale(1); }
     10% { transform: scale(1.1); }
@@ -280,7 +275,6 @@ canvas{
     bottom: 17px;
     left: 35%;
     z-index: 201;
-
 }
 
 .range input {
