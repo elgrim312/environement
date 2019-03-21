@@ -24,11 +24,11 @@ function fetchdata(country, date){
         data: { country: country},
         success: function(result){
             calculatedResult = result.data.data.carbonIntensity;
-            $('.sun').css('width',calculatedResult*2);
-            $('.sun').css('height',calculatedResult*2);
-            $('.sun').css('fill', 'rgb(255, 102, 51)');
-            $('.sun').css('stroke', 'rgb(255, 102, 51)');
-            $('.sun').css('fill-opacity', calculatedResult/100);
+            $('.sun').css('width',calculatedResult*2)
+            .css('height',calculatedResult*2)
+            .css('fill', 'rgb(255, 102, 51)')
+            .css('stroke', 'rgb(255, 102, 51)')
+            .css('fill-opacity', calculatedResult/100);
             $('.sun').css('stroke-opacity', calculatedResult/100);
         },
         error: function () {
