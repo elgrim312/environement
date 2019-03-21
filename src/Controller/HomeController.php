@@ -16,10 +16,8 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="app_index")
      */
-    public function index(OzaeManager $ozaeManager, DateManager $dateManager)
+    public function index()
     {
-        $ozaeManager->getRelatedArticle($dateManager->getLastNMonth("-42"), new \DateTime(), "fr");
-
         return $this->render('index.html.twig');
     }
 
@@ -35,7 +33,7 @@ class HomeController extends AbstractController
 
         return new JsonResponse([
             'data' => $airQualityManager->getAirQuality($date, $country),
-        ]);
+        ], 200);
     }
 
     /**
@@ -51,7 +49,7 @@ class HomeController extends AbstractController
 
         return new JsonResponse([
             'data' => $ozaeManager->getComputedForSentence($startDate, $currentDate, $country)
-        ]);
+        ], 200);
     }
 
     /**
@@ -63,6 +61,41 @@ class HomeController extends AbstractController
 
         return new JsonResponse([
             'data' => $co2SignalManager->getCarbonProgram($country)
-        ]);
+        ], 200);
+    }
+
+    /**
+     * @Route("/related-article", name="app_index_related_articles", methods={"POST"})
+     */
+    public function getRelatedArticle(OzaeManager $ozaeManager, Request $request, DateManager $dateManager)
+    {
+        $country = $request->request->get('country');
+        $date = $request->request->get('date');
+
+        switch ($date) {
+            case "0" :
+                $endDate = new \DateTime();
+                $startDate = $dateManager->getLastNMonth("-6");
+            break;
+
+            case "-6" :
+                $endDate = $dateManager->getLastNMonth("-6");
+                $startDate = $dateManager->getLastNMonth("-12");
+            break;
+
+            case "-12" :
+                $endDate = $dateManager->getLastNMonth("-12");
+                $startDate = $dateManager->getLastNMonth("-24");
+            break;
+
+            case "-24" :
+                $endDate = $dateManager->getLastNMonth("-24");
+                $startDate = $dateManager->getLastNMonth("-32");
+            break;
+        }
+
+        return new JsonResponse([
+            'data' => $ozaeManager->getRelatedArticles($startDate, $endDate, $country)
+        ], 200);
     }
 }
