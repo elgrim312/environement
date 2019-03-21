@@ -4,12 +4,13 @@ var current_date = '0';
 $( document ).ready(function() {
     fetchdata(current_country,current_date);
 
-    let my_range = $(".js-range-slider").data("ionRangeSlider");
+
     $(".js-range-slider").ionRangeSlider({
         skin: "square",
         min: 0,
         max: 5,
         values: ['2 ans','1 an','6 mois', '2 mois', 'Aujourd\'hui'],
+        from:5,
         onFinish: function (data) {
 
             switch (data.from_value) {
@@ -39,9 +40,9 @@ $( document ).ready(function() {
 
 $('.country-element').click(function(){
         current_country = $(this).attr('id');
+        $('.country-flag').css('background','url(/img/'+current_country+'.svg)  center').css('background-size','cover');
         fetchdata(current_country,'0');
-        my_range.reset();
-
+        $(".js-range-slider").data("ionRangeSlider").reset();
 });
 
 function fetchdata(country, date){

@@ -36,9 +36,16 @@ html{
 }
 
 body{
-    font:normal 75% Arial, Helvetica, sans-serif;
+    font:normal 75% "Gotham Book", Helvetica, sans-serif;
     background: url(/img/fond.svg) bottom center;
     background-size:cover;
+}
+
+@font-face {
+    font-family: 'Gotham Book';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Gotham Book'), url('/font/GothamBook.woff') format('woff');
 }
 
 canvas{
@@ -283,12 +290,13 @@ canvas{
 }
 
 /*-- Country --*/
+
 .country {
     background-color: rgba(255,255,255,.8);
     padding: 5px 5px 5px 5px;
     border-radius: 10px;
-    height: 10px;
-    width: 8%;
+    height: 29px;
+    width: 41px;
     margin: 5px 1% 5px 1%;
     position: absolute;
     top:5%;
@@ -299,15 +307,34 @@ canvas{
     overflow: hidden;
 }
 .country:hover {
-    height: 90px;
+    height: 125px;
+    width: 8%;
 }
 
 .country-list li{
-    padding-top: 5px;
+    padding-top: 12px;
     color: #313131;
     text-decoration: none;
     cursor: pointer;
 }
+
+.country-flag{
+    width: 30px;
+    height: 20px;
+    background: url(/img/fr.svg)  center;
+    background-size:cover;
+    transition: all .5s;
+    padding: 5px;
+}
+
+.green-dot{
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    background-color: #9DBAA0;
+}
+
+/*-- Slider --*/
 
 .irs--square .irs-handle{
     border: 3px solid #dedede !important;
@@ -325,3 +352,4 @@ canvas{
 .irs--square .irs-bar {
     background-color: #fff !important;
 }
+
