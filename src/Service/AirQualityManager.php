@@ -26,6 +26,7 @@ class AirQualityManager extends RequestManager
             "fr" => ['FR', 'FRANCE'],
             'dl' => ['DE', 'GERMANY'],
             'us' => ['TR', 'TURKEY'],
+            'br' => ['TR', 'TURKEY'],
         ];
     }
 

@@ -107,10 +107,10 @@ canvas{
 }
 
 .wave1 {
-    background: url('http://www.templates-preview.com/bootstrap-templates/300111854/images/wave1.png') 0 0 repeat-x;
+    background-image: url('/img/wave2.svg') 0 0 repeat-x;
 }
 .wave2 {
-    background: url('http://www.templates-preview.com/bootstrap-templates/300111854/images/wave2.png') 0 0 repeat-x;
+    background: url('/img/wave2.svg') 0 0 repeat-x;
 }
 
 /*-- Cloud --*/
@@ -297,6 +297,7 @@ canvas{
     -webkit-transition: all 0.5s;
     text-align: left;
     overflow: hidden;
+
 }
 .country:hover {
     height: 90px;
@@ -307,7 +308,9 @@ canvas{
     color: #313131;
     text-decoration: none;
     cursor: pointer;
+    bottom: 40px;
 }
+
 
 .irs--square .irs-handle{
     border: 3px solid #dedede !important;
@@ -316,6 +319,7 @@ canvas{
 .irs--square .irs-min, .irs--square .irs-max {
     background-color: unset !important;
     color: #fff !important;
+
 }
 
 .irs--square .irs-from, .irs--square .irs-to, .irs--square .irs-single {
