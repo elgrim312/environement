@@ -135,7 +135,7 @@ canvas{
 .cloud:before, .cloud:after {
     content: '';
     position: absolute;
-    background: #fff;
+    background: inherit;
     width: 100px; height: 80px;
     position: absolute; top: -15px; left: 10px;
 
@@ -179,7 +179,7 @@ canvas{
 
 .tree1,
 .tree2 {
-    fill: #b29b6e !important;
+    fill: #FFF !important;
     height: 9rem;
     width: auto;
     position: absolute;
@@ -190,7 +190,6 @@ canvas{
     bottom: 8.5rem;
     right: 3rem;
     transform: rotate(-2deg);
-
 }
 
 .tree2{
@@ -214,27 +213,27 @@ canvas{
     right: 9.2rem;
     bottom: 11rem;
     width: 70px;
-    height: auto;
+    height: 120px;
     transition: all 1s;
     transform: rotate(-6deg);
 }
 
 .pulse {
     animation-name: pulse_animation;
-    animation-duration: 5000ms;
+    animation-duration: 2000ms;
     transform-origin:70% 70%;
     animation-iteration-count: infinite;
     animation-timing-function: ease-in-out;
 }
 
+
+
 @keyframes pulse_animation {
     0% { transform: scale(1); }
-    30% { transform: scale(1.04); }
-    40% { transform: scale(1.08); }
-    50% { transform: scale(1.04); }
-    60% { transform: scale(1.03); }
-    70% { transform: scale(1.05); }
-    80% { transform: scale(1.03); }
+    10% { transform: scale(1.1); }
+    30% { transform: scale(1.02); }
+    50% {transform: scale(1.1); }
+    70%{ transform: scale(1.02); }
     100% { transform: scale(1); }
 }
 
@@ -269,7 +268,7 @@ canvas{
     position: fixed;
     bottom: 0;
     width: 100%;
-    height: auto;
+    height: 120px;
     fill: #A8C9AC;
 }
 
@@ -280,7 +279,8 @@ canvas{
     height: 5px;
     bottom: 17px;
     left: 35%;
-    z-index: 200;
+    z-index: 201;
+
 }
 
 .range input {
