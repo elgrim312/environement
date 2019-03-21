@@ -1,12 +1,65 @@
 
 
-
-$.ajax({
-    url: "test.html",
-    context: document.body
-}).done(function() {
-    $( this ).addClass( "done" );
+$( document ).ready(function() {
+    fetchdata('fr','0');
 });
+
+function fetchdata(country, date){
+    // AIRQUALITY
+    $.ajax({
+        url: "/airquality",
+        type: "POST",
+        data: { country: country, date : date},
+        success: function(result){
+            if (result.data.data[0].aqi_101>=50){
+                $('.cloud').css('background-color','grey');
+            }
+        },
+        error: function () {
+            console.log("error");
+        }});
+
+    // AIRQUALITY
+    $.ajax({
+        url: "/carbonEvolution",
+        type: "POST",
+        data: { country: country},
+        success: function(result){
+            calculatedResult = result.data.data.carbonIntensity;
+            $('.sun').css('width',calculatedResult*2);
+            $('.sun').css('height',calculatedResult*2);
+            $('.sun').css('fill', 'rgb(255, 102, 51)');
+            $('.sun').css('stroke', 'rgb(255, 102, 51)');
+            $('.sun').css('fill-opacity', calculatedResult/100);
+            $('.sun').css('stroke-opacity', calculatedResult/100);
+        },
+        error: function () {
+            console.log("error");
+        }});
+
+    $.ajax({
+        url: "/biodiversityScore",
+        type: "POST",
+        data: { country: country, date : date},
+        success: function(result){
+            if(result.data <= 0){
+                $('.rond').css('fill-opacity','0');
+            }
+            if(result.data <= -0.05){
+                $('.pointu').css('fill-opacity','0');
+            }
+
+        },
+        error: function () {
+            console.log("error");
+        }});
+
+}
+
+
+
+
+
 
 particlesJS('particles-js',
 
