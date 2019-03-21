@@ -48,6 +48,10 @@ $('.country-element').click(function(){
         $(".js-range-slider").data("ionRangeSlider").reset();
 });
 
+$('.overlay').click(function() {
+   $('.overlay').css('display', 'none');
+});
+
 function fetchdata(country, date){
     // AIRQUALITY
     $.ajax({
