@@ -5,12 +5,13 @@
         <title>{% block title %}Evymeo{% endblock %}</title>
         {% block stylesheets %}
             <link rel="stylesheet" media="screen" href="{{ asset('css/style.css') }}">
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/css/ion.rangeSlider.min.css"/>
         {% endblock %}
     </head>
     <body>
         {% block body %}{% endblock %}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/js/ion.rangeSlider.min.js"></script>
         <script type="text/javascript" src="{{ asset('js/particles.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
     </body>

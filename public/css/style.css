@@ -36,9 +36,16 @@ html{
 }
 
 body{
-    font:normal 75% Arial, Helvetica, sans-serif;
+    font:normal 75% "Gotham Book", Helvetica, sans-serif;
     background: url(/img/fond.svg) bottom center;
     background-size:cover;
+}
+
+@font-face {
+    font-family: 'Gotham Book';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Gotham Book'), url('/font/GothamBook.woff') format('woff');
 }
 
 canvas{
@@ -63,7 +70,7 @@ canvas{
     width: 100%;
     z-index: 12;
     left: 0;
-    bottom: 67px;
+    bottom: 56px;
 }
 
 .wave2 {
@@ -103,9 +110,6 @@ canvas{
     }
 }
 
-.wave1 {
-    background-image: url('/img/wave2.svg') 0 0 repeat-x;
-}
 .wave2 {
     background: url('/img/wave2.svg') 0 0 repeat-x;
 }
@@ -217,7 +221,7 @@ canvas{
 
 .pulse {
     animation-name: pulse_animation;
-    animation-duration: 2000ms;
+    animation-duration: 4000ms;
     transform-origin:70% 70%;
     animation-iteration-count: infinite;
     animation-timing-function: ease-in-out;
@@ -225,9 +229,9 @@ canvas{
 
 @keyframes pulse_animation {
     0% { transform: scale(1); }
-    10% { transform: scale(1.1); }
+    10% { transform: scale(1.08); }
     30% { transform: scale(1.02); }
-    50% {transform: scale(1.1); }
+    50% {transform: scale(1.08); }
     70%{ transform: scale(1.02); }
     100% { transform: scale(1); }
 }
@@ -267,120 +271,159 @@ canvas{
     fill: #A8C9AC;
 }
 
-/*-- Slider --*/
 .range {
     position: absolute;
-    width: 360px;
+    width: 33%;
     height: 5px;
-    bottom: 17px;
-    left: 35%;
+    bottom: 47px;
+    left: 33%;
     z-index: 201;
 }
 
-.range input {
-    width: 100%;
+/*-- Country --*/
+
+.country {
+    background-color: rgba(255,255,255,.8);
+    padding: 5px 5px 5px 5px;
+    border-radius: 10px;
+    height: 29px;
+    width: 41px;
+    margin: 5px 1% 5px 1%;
     position: absolute;
-    top: -1px;
-    height: 0;
-    -webkit-appearance: none;
+    top:5%;
+    left: 3%;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    text-align: left;
+    overflow: hidden;
+
 }
-.range input::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 18px;
-    height: 18px;
-    margin: -8px 0 0;
-    border-radius: 50%;
-    background: #37adbf;
-    cursor: pointer;
-    border: 0 !important;
+.country:hover {
+    height: 125px;
+    width: 8%;
 }
 
-.range input::-moz-range-thumb {
-    width: 18px;
-    height: 18px;
-    margin: -8px 0 0;
-    border-radius: 50%;
-    background: #37adbf;
-    cursor: pointer;
-    border: 0 !important;
-}
-.range input::-ms-thumb {
-    width: 18px;
-    height: 18px;
-    margin: -8px 0 0;
-    border-radius: 50%;
-    background: #37adbf;
-    cursor: pointer;
-    border: 0 !important;
-}
-.range input::-webkit-slider-runnable-track {
-    width: 100%;
-    height: 2px;
-    cursor: pointer;
-    background: black;
-}
-.range input::-moz-range-track {
-    width: 100%;
-    height: 2px;
-    cursor: pointer;
-    background: #b2b2b2;
-}
-.range input::-ms-track {
-    width: 100%;
-    height: 2px;
-    cursor: pointer;
-    background: #b2b2b2;
-}
-.range input:focus {
-    background: none;
-    outline: none;
-}
-.range input::-ms-track {
-    width: 100%;
-    cursor: pointer;
-    background: transparent;
-    border-color: transparent;
-    color: transparent;
-}
-.range-labels {
-    margin: 18px -41px 5px;
-    padding: 0;
-    list-style: none;
-    position: absolute;
-    bottom: 0;
-    left: 35%;
-    z-index: 200;
-}
-
-.range-labels li {
-    position: relative;
-    float: left;
-    width: 90.25px;
-    text-align: center;
-    color: black;
-    font-size: 14px;
+.country-list li{
+    padding-top: 12px;
+    color: #313131;
+    text-decoration: none;
     cursor: pointer;
     bottom: 40px;
 }
-.range-labels li::before {
-    position: absolute;
-    top: 35px;
-    right: 0;
-    left: 0;
-    content: "";
-    margin: 0 auto;
-    width: 9px;
-    height: 9px;
-    background: #b2b2b2;
-    border-radius: 50%;
+
+.country-list li:hover{
+    opacity: 0.7;
 }
 
-.range-labels .active {
-    color: #37adbf;
+
+.country-flag{
+    width: 30px;
+    height: 20px;
+    background: url(/img/fr.svg)  center;
+    background-size:cover;
+    transition: all .5s;
+    padding: 5px;
 }
-.range-labels .selected::before {
-    background: #37adbf;
+
+
+/*-- Slider --*/
+
+
+.irs--square .irs-handle{
+    border: 3px solid #dedede !important;
 }
-.range-labels .active.selected::before {
-    display: none;
+
+.irs--square .irs-min, .irs--square .irs-max {
+    background-color: unset !important;
+    color: #fff !important;
+
+}
+
+.irs--square .irs-from, .irs--square .irs-to, .irs--square .irs-single {
+    background-color: unset !important;
+}
+
+.irs--square .irs-bar {
+    background-color: #fff !important;
+}
+
+/*button*/
+
+.container {
+    position: absolute;
+    transform: translate(-50%,-50%);
+    margin: 0 auto 0;
+    z-index: 220;
+}
+
+.button--pulse {
+    position: relative;
+    display: block;
+    border: 1px solid white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    -webkit-animation: pulse 1.5s infinite cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    animation: pulse 1.5s infinite cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.button--pulse::before {
+    content: '';
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: white;
+    position: absolute;
+    box-shadow: 0 0 0 0 rgba(255,255,255, .5);
+    left: 50%;
+    top: 50%;
+    -ms-transform: translate(-50%,-50%); /* IE 9 */
+    -webkit-transform: translate(-50%,-50%); /* Safari and Chrome */
+    transform: translate(-50%,-50%);
+    -webkit-animation: pulse-shadow 1.5s infinite cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    animation: pulse-shadow 1.5s infinite cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(.8);
+    }
+    70% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(.8);
+    }
+}
+
+@keyframes pulse-shadow {
+    0% {}
+    70% {
+        box-shadow: 0 0 0 20px rgba(255,255,255, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255,255,255, 0);
+    }
+}
+
+.button-water{
+    right: 54%;
+    bottom: 8%;
+}
+
+.button-clouds{
+    top: 66%;
+    left: 16%;
+}
+
+.button-sun{
+    top: 12%;
+    right: 7%;
+}
+
+.button-trees{
+    bottom: 9%;
+    right: 4%;
 }

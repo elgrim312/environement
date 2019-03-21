@@ -1,5 +1,48 @@
+var current_country = 'fr';
+var current_date = '0';
+
 $( document ).ready(function() {
-    fetchdata('fr','0');
+    fetchdata(current_country,current_date);
+
+
+    $(".js-range-slider").ionRangeSlider({
+        skin: "square",
+        min: 0,
+        max: 5,
+        values: ['2 ans','1 an','6 mois', '2 mois', 'Aujourd\'hui'],
+        from:5,
+        onFinish: function (data) {
+
+            switch (data.from_value) {
+                case '2 ans':
+                    current_date = '-24';
+                    break;
+                case '1 an':
+                    current_date = '-12';
+                    break;
+                case '6 mois':
+                    current_date = '-6';
+                    break;
+                case '2 mois':
+                    current_date = '-2';
+                    break;
+                case 'Aujourd\'hui':
+                    current_date = '0';
+                    break;
+                default:
+                    current_date = '0';
+            }
+            fetchdata(current_country,current_date);
+        },
+    });
+});
+
+
+$('.country-element').click(function(){
+        current_country = $(this).attr('id');
+        $('.country-flag').css('background','url(/img/'+current_country+'.svg)  center').css('background-size','cover');
+        fetchdata(current_country,'0');
+        $(".js-range-slider").data("ionRangeSlider").reset();
 });
 
 function fetchdata(country, date){
@@ -14,7 +57,6 @@ function fetchdata(country, date){
             }
         },
         error: function () {
-            console.log("error");
         }});
 
     // AIRQUALITY
@@ -24,15 +66,16 @@ function fetchdata(country, date){
         data: { country: country},
         success: function(result){
             calculatedResult = result.data.data.carbonIntensity;
-            $('.sun').css('width',calculatedResult*2)
-            .css('height',calculatedResult*2)
+            $('.sun').css('width',calculatedResult)
+            .css('height',calculatedResult)
             .css('fill', 'rgb(255, 102, 51)')
             .css('stroke', 'rgb(255, 102, 51)')
-            .css('fill-opacity', calculatedResult/100);
-            $('.sun').css('stroke-opacity', calculatedResult/100);
+            .css('fill-opacity', calculatedResult/1000)
+            .css('stroke-opacity', calculatedResult/1000)
+            .css('animation-duration',(100%calculatedResult)*100 +'ms' );
+
         },
         error: function () {
-            console.log("error");
         }});
 
     $.ajax({
@@ -49,8 +92,19 @@ function fetchdata(country, date){
 
         },
         error: function () {
-            console.log("error");
         }});
+
+    $.ajax({
+        url: "/water-quality",
+        type: "POST",
+        data: { country: country, date : date},
+        success: function(result){
+           $('.wave2').css('animation','wave-animation1 '+result.data/10 +'s infinite linear')
+
+        },
+        error: function () {
+        }});
+
 
 }
 
@@ -174,17 +228,6 @@ particlesJS('particles-js',
     }
 );
 
-var sheet = document.createElement('style'),
-    $rangeInput = $('.range input'),
-    prefs = ['webkit-slider-runnable-track', 'moz-range-track', 'ms-track'];
-
-document.body.appendChild(sheet);
-
-var getTrackStyle = function (el) {
-    var curVal = el.value,
-        val = (curVal - 1) * 25,
-        style = '';
-
     // Set active label
     $('.range-labels li').removeClass('active selected');
 
@@ -238,5 +281,3 @@ $('.open').on('click', function() {
 $('.close').on('click', function() {
    $('.modal').css('display', 'none');
 });
-
-
