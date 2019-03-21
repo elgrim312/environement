@@ -43,8 +43,10 @@ class HomeController extends AbstractController
      */
     public function getBiodiversity(OzaeManager $ozaeManager, Request $request, DateManager $dateManager)
     {
-        $startDate = ($dateManager == 0) ? $dateManager->getLastDay() : $dateManager->getLastNMonth($request->request->get('date'));
         $country = $request->request->get('country');
+        $date = $request->request->get('date');
+        $startDate = ($date == 0) ? $dateManager->getLastDay() : $dateManager->getLastNMonth($request->request->get('date'));
+
         $currentDate = new \DateTime();
 
         return new JsonResponse([
