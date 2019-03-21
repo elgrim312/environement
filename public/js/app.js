@@ -216,8 +216,4 @@ particlesJS('particles-js',
     }
 );
 
-//get slider value
-$('.by-range').on('click', function() {
-    var valslider = $(this).data('month');
-    console.log(valslider);
-});
+
