@@ -549,3 +549,35 @@ canvas{
     padding-left: 20px;
     cursor:pointer;
 }
+
+
+.overlay__intro {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 2220;
+    position: absolute;
+    transition: all 0.75s;
+}
+
+.overlay__text {
+    margin-top: 40px;
+}
+
+.btn__overlay {
+    background-color: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+    padding: 10px 20px;
+    margin: 0 auto;
+    display: block;
+    border-radius: 20px;
+    font-size: 20px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.disable {
+    opacity: 0;
+    z-index: -1;
+}

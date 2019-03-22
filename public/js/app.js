@@ -338,4 +338,8 @@ $(function(){
     })
 });
 
+$('.btn__overlay').on('click',function () {
+    $('.overlay__intro').addClass('disable')
+})
+
 
