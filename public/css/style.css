@@ -441,7 +441,7 @@ canvas{
 
 .text-overlay {
     text-align: center;
-    margin-top: 17%;
+    margin-top: 21%;
     color: white;
     font-size: 20px;
 }
@@ -577,7 +577,7 @@ canvas{
     display: block;
     border-radius: 20px;
     font-size: 20px;
-    margin-top: 20px;
+    margin-top: 55px;
     cursor: pointer;
 }
 
