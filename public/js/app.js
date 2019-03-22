@@ -1,9 +1,6 @@
 var current_country = 'fr';
 var current_date = '0';
-var carbon;
-var airqual;
-var biodiv;
-var waterqual;
+var globalindex = 0;
 
 $( document ).ready(function() {
     fetchdata(current_country,current_date);
@@ -53,6 +50,7 @@ $('.country-element').click(function(){
         $(this).addClass('current__country');
         fetchdata(current_country,'0');
         $(".js-range-slider").data("ionRangeSlider").reset();
+        globalindex = 0;
 });
 
 $('.overlay').click(function() {
@@ -68,8 +66,8 @@ function fetchdata(country, date){
         success: function(result){
             if (result.data.data[0].aqi_101>=50){
                 $('.cloud').css('background-color','grey');
+                globalindex++;
             }
-            airqual = result.data.data[0].aqi_101;
         },
         error: function () {
         }});
@@ -83,12 +81,12 @@ function fetchdata(country, date){
             calculatedResult = result.data.data.carbonIntensity;
             $('.sun').css('width',calculatedResult)
             .css('height',calculatedResult)
-            .css('fill', 'rgb(255, 102, 51)')
-            .css('stroke', 'rgb(255, 102, 51)')
             .css('fill-opacity', calculatedResult/1000)
             .css('stroke-opacity', calculatedResult/1000 + '!important')
             .css('animation-duration',(100%calculatedResult)*100 +'ms' );
-
+            if(calculatedResult > 100){
+                globalindex++;
+            }
           carbon  = calculatedResult;
         },
         error: function () {
@@ -102,7 +100,19 @@ function fetchdata(country, date){
             if(result.data <= 0){
                 $('.rond').css('fill-opacity','0');
                 $('.pointu').css('fill-opacity','0');
+                $('.grass').css('background-color','gray');
+                $('body').css('background','url(/img/fond2.svg) bottom center');
+                $('body').css('background-size','cover');
+                $('.footer').css('fill','#9B9B9B');
+            }else {
+                $('.rond').css('fill-opacity','1');
+                $('.pointu').css('fill-opacity','1');
+                $('.grass').css('background-color','#9DBAA0');
+                $('body').css('background','url(/img/fond.svg) bottom center');
+                $('body').css('background-size','cover');
+                $('.footer').css('fill','#A8C9AC');
             }
+
             biodiv= result.data * 100;
         },
         error: function () {
@@ -114,15 +124,118 @@ function fetchdata(country, date){
         data: { country: country, date : date},
         success: function(result){
            $('.wave2').css('animation','wave-animation1 '+result.data/10 +'s infinite linear')
-           waterqual  = result.data;
+           if(result.data > 50){
+               globalindex++;
+           }
         },
         error: function () {
         }});
 
-
-    var globalindex = (airqual + waterqual + biodiv );
-   console.log(globalindex);
 }
+
+
+
+
+
+
+
+$(function(){
+    $('.button-water').on('click', function(){
+        $('.overlay').addClass('show');
+        $('.modal').addClass('show');
+        $('.content__article').css('display','flex');
+        $('.modal__content-val').html('<object type="image/svg+xml"  class="modal__loader" data="../img/ring.svg"></object>');
+        var country = $('.country-element').attr('id');
+        var date = current_date;
+
+        $.ajax({
+            url: "/related-article",
+            type: "POST",
+            data: { country: country, date : date, type: "waterPollution"},
+            success: function(result){
+               $('.modal__content-val').html(result);
+            },
+            error: function () {
+            }});
+    });
+
+    $('.button-trees').on('click', function(){
+        $('.overlay').addClass('show');
+        $('.modal').addClass('show');
+        $('.content__article').css('display','flex');
+        $('.modal__content-val').html('<object type="image/svg+xml"  class="modal__loader" data="../img/ring.svg"></object>');
+
+
+        var country = $('.current__country').attr('id');
+        var date = current_date;
+
+        $.ajax({
+            url: "/related-article",
+            type: "POST",
+            data: { country: country, date : date, type: "biodiversity"},
+            success: function(result){
+                $('.modal__content-val').html(result);
+            },
+            error: function () {
+            }});
+    });
+
+    $('.button-clouds').on('click', function(){
+        $('.overlay').addClass('show');
+        $('.modal').addClass('show');
+        $('.content__article').css('display','flex');
+        $('.modal__content-val').html('<object type="image/svg+xml"  class="modal__loader" data="../img/ring.svg"></object>');
+
+
+        var country = $('.current__country').attr('id');
+        var date = current_date;
+
+        $.ajax({
+            url: "/related-article",
+            type: "POST",
+            data: { country: country, date : date, type: "airQualiy"},
+            success: function(result){
+                $('.modal__content-val').html(result);
+            },
+            error: function () {
+            }});
+    });
+
+    $('.button-sun').on('click', function(){
+        $('.overlay').addClass('show');
+        $('.modal').addClass('show');
+        $('.content__article').css('display','flex');
+        $('.modal__content-val').html('<object type="image/svg+xml"  class="modal__loader" data="../img/ring.svg"></object>');
+        var country = $('.current__country').attr('id');
+        var date = current_date;
+
+        $.ajax({
+            url: "/related-article",
+            type: "POST",
+            data: { country: country, date : date, type: "climat"},
+            success: function(result){
+                $('.modal__content-val').html(result);
+            },
+            error: function () {
+            }});
+    });
+
+    $('.overlay').on('click', function(){
+        $(this).removeClass('show');
+        $('.modal').removeClass('show');
+        $('.content__article').css('display','none');
+    })
+
+    $('.arrow').on('click', function () {
+        $('.overlay').removeClass('show');
+        $('.modal').removeClass('show');
+    })
+});
+
+$('.btn__overlay').on('click',function () {
+    $('.overlay__intro').addClass('disable')
+});
+
 
 particlesJS('particles-js',
 
@@ -243,103 +356,3 @@ particlesJS('particles-js',
         }
     }
 );
-
-$(function(){
-    $('.button-water').on('click', function(){
-        $('.overlay').addClass('show');
-        $('.modal').addClass('show');
-        var country = $('.country-element').attr('id');
-        var date = current_date;
-        console.log(country);
-
-        $.ajax({
-            url: "/related-article",
-            type: "POST",
-            data: { country: country, date : date, type: "waterPollution"},
-            success: function(result){
-                console.log(result);
-               $('.modal__content-val').html(result);
-            },
-            error: function () {
-            }});
-    });
-
-    $('.button-trees').on('click', function(){
-        $('.overlay').addClass('show');
-        $('.modal').addClass('show');
-        $('.content__article').css('display','flex');
-
-
-        var country = $('.current__country').attr('id');
-        var date = current_date;
-
-        $.ajax({
-            url: "/related-article",
-            type: "POST",
-            data: { country: country, date : date, type: "biodiversity"},
-            success: function(result){
-                console.log(result);
-                $('.modal__content-val').html(result);
-            },
-            error: function () {
-            }});
-    });
-
-    $('.button-clouds').on('click', function(){
-        $('.overlay').addClass('show');
-        $('.modal').addClass('show');
-        $('.content__article').css('display','flex');
-
-
-        var country = $('.current__country').attr('id');
-        var date = current_date;
-
-        $.ajax({
-            url: "/related-article",
-            type: "POST",
-            data: { country: country, date : date, type: "airQualiy"},
-            success: function(result){
-                console.log(result);
-                $('.modal__content-val').html(result);
-            },
-            error: function () {
-            }});
-    });
-
-    $('.button-sun').on('click', function(){
-        $('.overlay').addClass('show');
-        $('.modal').addClass('show');
-        $('.content__article').css('display','flex');
-        $('.modal__content-val').html('<object type="image/svg+xml"  class="modal__loader" data="../img/ring.svg"></object>');
-        var country = $('.current__country').attr('id');
-        var date = current_date;
-
-        $.ajax({
-            url: "/related-article",
-            type: "POST",
-            data: { country: country, date : date, type: "climat"},
-            success: function(result){
-                console.log(result);
-                $('.modal__content-val').html(result);
-            },
-            error: function () {
-            }});
-    });
-
-    $('.overlay').on('click', function(){
-        $(this).removeClass('show');
-        $('.modal').removeClass('show');
-        $('.content__article').css('display','none');
-    })
-
-    $('.arrow').on('click', function () {
-        $('.overlay').removeClass('show');
-        $('.modal').removeClass('show');
-    })
-});
-
-$('.btn__overlay').on('click',function () {
-    $('.overlay__intro').addClass('disable')
-});
-
-
