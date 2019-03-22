@@ -545,9 +545,13 @@ canvas{
 }
 
 .arrow{
-    font-size: 20px;
+    font-size: 30px;
     padding-left: 20px;
-    cursor:pointer;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+    width: 20px;
 }
 
 
@@ -580,4 +584,11 @@ canvas{
 .disable {
     opacity: 0;
     z-index: -1;
+}
+
+.modal__loader {
+    width: 5%;
+    display: block;
+    margin: 0 auto;
+    fill: #D8E9E3 !important;
 }

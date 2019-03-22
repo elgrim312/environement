@@ -310,7 +310,7 @@ $(function(){
         $('.overlay').addClass('show');
         $('.modal').addClass('show');
         $('.content__article').css('display','flex');
-
+        $('.modal__content-val').html('<object type="image/svg+xml"  class="modal__loader" data="../img/ring.svg"></object>');
         var country = $('.current__country').attr('id');
         var date = current_date;
 
@@ -340,6 +340,6 @@ $(function(){
 
 $('.btn__overlay').on('click',function () {
     $('.overlay__intro').addClass('disable')
-})
+});
 
 
